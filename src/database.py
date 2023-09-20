@@ -43,6 +43,15 @@ class CRUDMixin:
 
         return result.first()
 
+    @classmethod
+    def get_all(cls, **kwargs):
+        result = cls.db_session.query(cls)
+
+        for attr, value in kwargs.items():
+            result = result.filter(getattr(cls, attr) == value)
+
+        return result.all()
+
     def update(self, **kwargs):
         for attr, value in kwargs.items():
             setattr(self, attr, value)

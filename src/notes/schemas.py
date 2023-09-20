@@ -20,7 +20,7 @@ class RouteResponse(BaseModel):
 class NoteInDB(InDB):
     text: str
     views_count: int
-    desk_id: int
+    board_id: Union[int, None] = None
 
 
 class BoardInDB(InDB):
@@ -29,4 +29,16 @@ class BoardInDB(InDB):
 
 
 class BoardResponse(RouteResponse):
-    board: BoardInDB
+    board: Union[BoardInDB, None] = None
+
+
+class BoardListResponse(RouteResponse):
+    boards: Union[List[BoardInDB], None] = None
+
+
+class NoteResponse(RouteResponse):
+    note: Union[NoteInDB, None] = None
+
+
+class NoteListResponse(RouteResponse):
+    notes: Union[List[NoteInDB], None] = None
